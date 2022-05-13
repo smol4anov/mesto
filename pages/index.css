@@ -4,9 +4,11 @@
 @import url(../blocks/page/page.css);
 /*Блоки*/
 @import url(../blocks/header/header.css);
+@import url(../blocks/logo/logo.css);
 
 
 /* Элементы */
+@import url(../blocks/page/__wrapper/page__wrapper.css);
 
 
 /* Модификаторы */

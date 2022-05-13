@@ -1,0 +1,6 @@
+.logo {
+  background-image: url(../..//images/Logo.svg);
+  display: inline-block;
+  min-width: 142px;
+  min-height: 33px;
+}
