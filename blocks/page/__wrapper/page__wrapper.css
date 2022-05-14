@@ -1,6 +1,11 @@
 .page__wrapper {
-  width: 68.75%;
+  width: 68.75vw;
   max-width: 1280px;
+  height: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 45px 0 60px;
+  padding-top: 45px;
+  display: grid;
+  grid-template-rows: 74px 1fr 104px;
+  row-gap: 40px;
 }

@@ -5,10 +5,23 @@
 /*Блоки*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
-
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
 
 /* Элементы */
 @import url(../blocks/page/__wrapper/page__wrapper.css);
+@import url(../blocks/page/__profile/page__profile.css);
+
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__title-conteiner/profile__title-conteiner.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+
+@import url(../blocks/footer/__content/footer__content.css);
 
 
 /* Модификаторы */

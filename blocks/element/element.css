@@ -1,0 +1,42 @@
+.element {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.element__image {
+  width: 100%;
+}
+
+.element__title {
+  max-width: 90%;
+  margin: 0;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 120.83%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.element__button {
+  background: no-repeat center url(../../images/like.svg);
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  border: none;
+  transition: opacity .3s linear;
+}
+
+.element__button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.element__content {
+  display: flex;
+  padding: 25px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
