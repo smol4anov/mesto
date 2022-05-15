@@ -29,6 +29,5 @@
 
 @import url(../blocks/footer/__content/footer__content.css);
 
-
 /* Модификаторы */
 @import url(../blocks/element/__button/_active/element__button_active.css);

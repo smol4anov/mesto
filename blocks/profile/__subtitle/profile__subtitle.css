@@ -7,3 +7,22 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__subtitle {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__subtitle {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__subtitle {
+    font-size: 14px;
+    text-align: center;
+  }
+}
