@@ -8,6 +8,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/popup/popup.css);
 
 /* Элементы */
 @import url(../blocks/page/__wrapper/page__wrapper.css);
@@ -29,5 +30,12 @@
 
 @import url(../blocks/footer/__content/footer__content.css);
 
+@import url(../blocks/popup/__conteiner/popup__conteiner.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__submit/popup__submit.css);
+@import url(../blocks/popup/__close/popup__close.css);
+
 /* Модификаторы */
 @import url(../blocks/element/__button/_active/element__button_active.css);
+@import url(../blocks/popup/_opened/popup_opened.css);

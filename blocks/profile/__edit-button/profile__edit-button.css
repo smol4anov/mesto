@@ -2,7 +2,7 @@
   background: no-repeat center url(../../../images/edit-button.svg);
   min-width: 24px;
   min-height: 24px;
-  padding: auto;
+  /*padding: auto;*/
   border: 1px solid #fff;
   transition: opacity .3s linear;
   transform: translateY(3px);
