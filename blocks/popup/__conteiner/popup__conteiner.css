@@ -6,6 +6,7 @@
   padding: 34px 41px 37px 31px;
   box-sizing: border-box;
   position: relative;
+  transform: translateX(5px);
 }
 
 @media screen and (max-width: 767px) {

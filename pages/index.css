@@ -1,18 +1,22 @@
 /* Обнуляющий стиль */
 @import url(../vendor/normalize.css);
+/* Шрифты */
+@import url(../vendor/fonts.css);
 /* Основной блок */
 @import url(../blocks/page/page.css);
 /*Блоки*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/popup/popup.css);
 
 /* Элементы */
 @import url(../blocks/page/__wrapper/page__wrapper.css);
+@import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/page/__main/page__main.css);
 @import url(../blocks/page/__profile/page__profile.css);
+@import url(../blocks/page/__footer/page__footer.css);
 
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
@@ -22,6 +26,7 @@
 @import url(../blocks/profile/__title-conteiner/profile__title-conteiner.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
+@import url(../blocks/elements/__list/elements__list.css);
 
 @import url(../blocks/element/__button/element__button.css);
 @import url(../blocks/element/__content/element__content.css);
