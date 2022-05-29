@@ -28,9 +28,10 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
+        
         <ul class="elements__list">
-          <li class="element">
-            <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+          <!--<li class="element">
+            <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Карачаевск" class="element__image">
             <div class="element__content">
               <h2 class="element__title">Карачаевск</h2>
               <button type="button" class="element__button element__button_active"></button>
@@ -70,7 +71,7 @@
               <h2 class="element__title">Карачаево-Черкессия</h2>
               <button type="button" class="element__button"></button>
             </div>
-          </li>
+          </li>-->
         </ul>
       </section>
     </main>
@@ -86,6 +87,17 @@
         <button type="button" class="popup__close"></button>
       </form>
     </section>
+
+    <template id="element-template">
+      <li class="element">
+        <img src="" alt="" class="element__image">
+        <div class="element__content">
+          <h2 class="element__title"></h2>
+          <button type="button" class="element__button"></button>
+        </div>
+      </li>
+    </template>
+
   </div>
   <script src="./scripts/index.js"></script>
 </body>
