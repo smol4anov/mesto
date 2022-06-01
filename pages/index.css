@@ -27,11 +27,13 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
 @import url(../blocks/elements/__list/elements__list.css);
+@import url(../blocks/elements/__no-places/elements__no-places.css);
 
 @import url(../blocks/element/__button/element__button.css);
 @import url(../blocks/element/__content/element__content.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__title/element__title.css);
+@import url(../blocks/element/__delete/element__delete.css);
 
 @import url(../blocks/footer/__content/footer__content.css);
 
@@ -42,5 +44,6 @@
 @import url(../blocks/popup/__close/popup__close.css);
 
 /* Модификаторы */
+@import url(../blocks/elements/__no-places/_hidden/elements__no-places_hidden.css);
 @import url(../blocks/element/__button/_active/element__button_active.css);
 @import url(../blocks/popup/_opened/popup_opened.css);

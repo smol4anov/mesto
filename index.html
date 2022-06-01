@@ -28,7 +28,7 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        
+        <p class="elements__no-places">Добавьте новое воспоминание прямо&nbsp;сейчас</p>
         <ul class="elements__list">
           <!--<li class="element">
             <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Карачаевск" class="element__image">
@@ -87,10 +87,20 @@
         <button type="button" class="popup__close"></button>
       </form>
     </section>
+    <section class="popup popup_new-place">
+      <form name="popupform" action="#" class="popup__conteiner">
+        <h2 class="popup__title">Новое место</h2>
+        <input class="popup__input" type="text" id="name" name="name" placeholder="Название">
+        <input class="popup__input" type="text" id="image-link" name="image-link" placeholder="Ссылка на картинку">
+        <button class="popup__submit" type="submit">Создать</button>
+        <button type="button" class="popup__close"></button>
+      </form>
+    </section>
 
     <template id="element-template">
       <li class="element">
         <img src="" alt="" class="element__image">
+        <button type="button" class="element__delete"></button>
         <div class="element__content">
           <h2 class="element__title"></h2>
           <button type="button" class="element__button"></button>

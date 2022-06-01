@@ -6,7 +6,7 @@
   padding-top: 45px;
   display: grid;
   grid-template-rows: 74px 1fr 104px;
-  grid-template-columns: 1fr 68.75vw 1fr;
+  grid-template-columns: 1fr minmax(auto, 68.75vw) 1fr;
   row-gap: 40px;
 }
 

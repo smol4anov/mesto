@@ -7,7 +7,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(35px, -40px);
+  transform: translate(40px, -40px);
 }
 
 .popup__close:hover {
