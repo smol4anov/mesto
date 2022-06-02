@@ -1,8 +1,4 @@
 .popup_opened {
-  display: flex;
-}
-
-.popup__image{
-  max-width: 75vw;
-  max-height: 75vh;
+  visibility: visible;
+  opacity: 1;
 }

@@ -44,6 +44,7 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__wrapper/popup__wrapper.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
+@import url(../blocks/popup/__image/popup__image.css);
 
 /* Модификаторы */
 @import url(../blocks/elements/__no-places/_hidden/elements__no-places_hidden.css);

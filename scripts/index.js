@@ -25,51 +25,121 @@ const initialCards = [
   }
 ];
 
+// переменные
 const popup = document.querySelector('.popup');
-const profileElement = document.querySelector('.profile');
-
-const title = profileElement.querySelector('.profile__title');
-const subtitle = profileElement.querySelector('.profile__subtitle');
-const editButton = profileElement.querySelector('.profile__edit-button');
-
 const popupForm = popup.querySelector('.popup__conteiner');
 const nameInput = popup.querySelector('#name');
 const aboutInput = popup.querySelector('#about-self');
 
+const profileElement = document.querySelector('.profile');
+const title = profileElement.querySelector('.profile__title');
+const subtitle = profileElement.querySelector('.profile__subtitle');
+const editButton = profileElement.querySelector('.profile__edit-button');
+const addButton = profileElement.querySelector('.profile__add-button');
+
+const addPopup = document.querySelector('.popup_new-place');
+const addPopupForm = addPopup.querySelector('.popup__conteiner');
+const placeInput = addPopup.querySelector('#place');
+const imageInput = addPopup.querySelector('#image');
 
 const cardsList = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#element-template').content;
+const cardTemplateNode = cardTemplate.querySelector('.element');
+
+const imagePopup = document.querySelector('.popup_open-image');
+const imagePopupTitle = imagePopup.querySelector('.popup__subtitle');
+const imagePopupLink = imagePopup.querySelector('.popup__image');
 
 const noPlaces = document.querySelector('.elements__no-places');
 
-const addPopup = document.querySelector('.popup_new-place');
-const addButton = profileElement.querySelector('.profile__add-button');
-
-function closePopup(popupElem) {
-  popupElem.classList.remove('popup_opened');
-}
+// общие функции
+const closePopup = evt => evt.currentTarget.closest('.popup')
+  .classList.remove('popup_opened');
 
 function showPopup(popupElem) {
   popupElem.classList.add('popup_opened');
 
   const closeButton = popupElem.querySelector('.popup__close');
-  closeButton.addEventListener('click', () => { closePopup(popupElem) });
-
+  closeButton.addEventListener('click', closePopup);
 }
 
-function formSubmitHandler(event) {
-  event.preventDefault();
-  title.textContent = nameInput.value;
-  subtitle.textContent = aboutInput.value;
-  closePopup(popup);
-}
+const likeButtonClick = evt => evt.target.classList.toggle('element__button_active');
 
-function renderNoCards() {
-  noPlaces.classList.remove('elements__no-places_hidden');
+const deleteButtonClick = evt => {
+  evt.currentTarget.closest('.element').remove();
+  switchNoCards();
 };
 
-function renderHasCards() {
-  noPlaces.classList.add('elements__no-places_hidden');
+// редактирование профиля
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  title.textContent = nameInput.value;
+  subtitle.textContent = aboutInput.value;
+  closePopup(evt);
+}
+
+editButton.addEventListener('click', () => {
+  showPopup(popup);
+  nameInput.value = title.textContent;
+  aboutInput.value = subtitle.textContent;
+});
+
+popupForm.addEventListener('submit', formSubmitHandler);
+
+//добавление карточки
+addButton.addEventListener('click', () => showPopup(addPopup));
+
+const openImage = evt => {
+  const imageElement = evt.currentTarget;
+
+  const cardTitle = imageElement.closest('.element')
+    .querySelector('.element__title');
+  imagePopupTitle.textContent = cardTitle.textContent;
+  imagePopupLink.src = imageElement.src;
+  imagePopupLink.alt = cardTitle.textContent;
+
+  showPopup(imagePopup);
+};
+
+const renderCard = (place, imageLink) => {
+
+  const newCard = cardTemplateNode.cloneNode(true);
+
+  newCard.querySelector('.element__title').textContent = place;
+
+  const image = newCard.querySelector('.element__image');
+
+  image.src = imageLink;
+  image.alt = place;
+
+  image.addEventListener('click', openImage);
+
+  const likeButton = newCard.querySelector('.element__button');
+
+  likeButton.addEventListener('click', likeButtonClick);
+
+  const deleteButton = newCard.querySelector('.element__delete');
+
+  deleteButton.addEventListener('click', deleteButtonClick);
+
+  return newCard;
+
+};
+
+const addFormSubmitHandler = evt => {
+  evt.preventDefault();
+  const newCard = renderCard(placeInput.value, imageInput.value);
+  cardsList.prepend(newCard);
+  closePopup(evt);
+  addPopupForm.reset();
+  switchNoCards();
+};
+
+const switchNoCards = () => {
+  const cards = cardsList.querySelectorAll('.element');
+  (cards.length) ? 
+    noPlaces.classList.add('elements__no-places_hidden') :
+    noPlaces.classList.remove('elements__no-places_hidden');
 };
 
 function cardsRender(cardsArray) {
@@ -80,53 +150,14 @@ function cardsRender(cardsArray) {
     cards[i].remove();
   }
 
-  if (cardsArray.length === 0) {
-    renderNoCards();
-    return;
-  }
-
   cardsArray.forEach((item) => {
-
-    const newCard = cardTemplate.querySelector('.element').cloneNode(true);
-
-    newCard.querySelector('.element__title').textContent = item.name;
-
-    const image = newCard.querySelector('.element__image');
-
-    image.src = item.link;
-    image.alt = item.name;
-
-    const likeButton = newCard.querySelector('.element__button');
-
-    likeButton.addEventListener('click', (event) => {
-      event.target.classList.toggle('element__button_active');
-    });
-
-    const deleteButton = newCard.querySelector('.element__delete');
-
-    deleteButton.addEventListener('click', (event) => {
-      event.target.parentElement.remove();
-    });
-
+    const newCard = renderCard(item.name, item.link);
     cardsList.append(newCard);
-
   });
 
-  renderHasCards();
+  switchNoCards();
 }
 
-
-
-editButton.addEventListener('click', () => {
-  showPopup(popup);
-  nameInput.value = title.textContent;
-  aboutInput.value = subtitle.textContent;
-});
-
-popupForm.addEventListener('submit', formSubmitHandler);
+addPopupForm.addEventListener('submit', addFormSubmitHandler);
 
 cardsRender(initialCards);
-
-addButton.addEventListener('click', () => {
-  showPopup(addPopup);
-});
