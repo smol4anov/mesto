@@ -19,7 +19,7 @@
       <section class="profile page__profile">
         <img src="./images/avatar.jpg" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
-          <div class="profile__title-conteiner">
+          <div class="profile__title-container">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
           </div>
@@ -36,25 +36,25 @@
     <footer class="footer page__footer">
       <p class="footer__content">&copy; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <form name="popupform" action="#" class="popup__conteiner">
+    <section class="popup popup_type_profile">
+      <form name="popupForm" action="#" class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input" type="text" id="name" name="name" placeholder="Имя">
+        <input class="popup__input" type="text" id="name" name="name" required placeholder="Имя">
         <input class="popup__input" type="text" id="about-self" name="about-self" placeholder="О себе">
         <button class="popup__submit" type="submit">Сохранить</button>
         <button type="button" class="popup__close"></button>
       </form>
     </section>
-    <section class="popup popup_new-place">
-      <form name="popupform" action="#" class="popup__conteiner">
+    <section class="popup popup_type_new-place">
+      <form name="popupForm" action="#" class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <input class="popup__input" type="text" id="place" name="place" placeholder="Название">
-        <input class="popup__input" type="text" id="image" name="image" placeholder="Ссылка на картинку">
+        <input class="popup__input" type="text" id="place" name="place" required placeholder="Название">
+        <input class="popup__input" type="url" id="image" name="image" required placeholder="Ссылка на картинку">
         <button class="popup__submit" type="submit">Создать</button>
         <button type="button" class="popup__close"></button>
       </form>
     </section>
-    <section class="popup popup_open-image">
+    <section class="popup popup_type_open-image">
       <div class="popup__wrapper">
         <h3 class="popup__subtitle">Подпись к фото</h3>
         <img src="./images/download.gif" alt="" class="popup__image">
@@ -74,7 +74,7 @@
     </template>
 
   </div>
-  <script src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
