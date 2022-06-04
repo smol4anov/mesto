@@ -1,5 +1,3 @@
-import { initialCards } from './cards.js';
-
 // переменные
 const popup = document.querySelector('.popup_type_profile');
 const popupForm = popup.querySelector('.popup__container');
@@ -37,11 +35,11 @@ function showPopup(popupElem) {
   closeButton.addEventListener('click', closePopup);
 }
 
-const handlerLikeButton = evt => evt.target.classList.toggle('element__button_active');
+const handleLikeButton = evt => evt.target.classList.toggle('element__button_active');
 
-const handlerDeleteButton = evt => evt.currentTarget.closest('.element').remove();
+const handleDeleteButton = evt => evt.currentTarget.closest('.element').remove();
 
-function handlerEditProfileFormSubmit(evt) {
+function handleEditProfileFormSubmit(evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
   subtitle.textContent = aboutInput.value;
@@ -75,16 +73,16 @@ const createCard = (place, imageLink) => {
 
   const likeButton = newCard.querySelector('.element__button');
 
-  likeButton.addEventListener('click', handlerLikeButton);
+  likeButton.addEventListener('click', handleLikeButton);
 
   const deleteButton = newCard.querySelector('.element__delete');
 
-  deleteButton.addEventListener('click', handlerDeleteButton);
+  deleteButton.addEventListener('click', handleDeleteButton);
 
   return newCard;
 };
 
-const handlerAddFormSubmit = evt => {
+const handleAddFormSubmit = evt => {
   evt.preventDefault();
   const newCard = createCard(placeInput.value, imageInput.value);
   cardsList.prepend(newCard);
@@ -99,7 +97,7 @@ const switchNoCards = () => {
     noPlaces.classList.remove('elements__no-places_hidden');
 };
 
-function cardsRender(cardsArray) {
+function renderCards(cardsArray) {
 
   cardsArray.forEach((item) => {
     const newCard = createCard(item.name, item.link);
@@ -119,8 +117,8 @@ observer.observe(cardsList, { childList: true });
 
 addButton.addEventListener('click', () => showPopup(addPopup));
 
-popupForm.addEventListener('submit', handlerEditProfileFormSubmit);
+popupForm.addEventListener('submit', handleEditProfileFormSubmit);
 
-addPopupForm.addEventListener('submit', handlerAddFormSubmit);
+addPopupForm.addEventListener('submit', handleAddFormSubmit);
 
-cardsRender(initialCards);
+renderCards(initialCards);
