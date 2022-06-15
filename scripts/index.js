@@ -25,14 +25,68 @@ const imagePopupLink = imagePopup.querySelector('.popup__image');
 
 const noPlaces = document.querySelector('.elements__no-places');
 
-const closePopup = evt => evt.currentTarget.closest('.popup')
-  .classList.remove('popup_opened');
+
+const validatePopupFormBeforeOpen = (popupElem) => {
+  const formElem = popupElem.querySelector(validationSettings.formSelector);
+  if (formElem) {
+    resetInputError(formElem, validationSettings);
+  }
+};
+
+const resetPopupFormAfterClose = (popupElem) => {
+  const formElem = popupElem.querySelector(validationSettings.formSelector);
+  if (formElem) {
+    formElem.reset();
+  }
+};
+
+const closePopup = popupElem => {
+  popupElem.classList.remove('popup_opened');
+  resetPopupFormAfterClose(popupElem);
+  removePopupEventsListeners(popupElem);
+};
+
+const closePopupByButton = evt => {
+  const currentPopup = evt.currentTarget.closest('.popup');
+  closePopup(currentPopup);
+};
+
+const closePopupByEscKey = (evt) => {
+  if (evt.key !== 'Escape') {
+    return;
+  }
+  const openedPopup = document.querySelector('.popup_opened');
+  if (openedPopup) {
+    closePopup(openedPopup);
+  }
+};
+
+const closePopupByOverleyClick = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+};
+
+const addPopupEventsListeners = (popupElem) => {
+  const closeButton = popupElem.querySelector('.popup__close');
+
+  closeButton.addEventListener('click', closePopupByButton);
+  popupElem.addEventListener('click', closePopupByOverleyClick);
+  document.addEventListener('keydown', closePopupByEscKey);
+};
+
+const removePopupEventsListeners = (popupElem) => {
+  const closeButton = popupElem.querySelector('.popup__close');
+
+  closeButton.removeEventListener('click', closePopupByButton);
+  popupElem.removeEventListener('click', closePopupByOverleyClick);
+  document.removeEventListener('keydown', closePopupByEscKey);
+};
 
 function showPopup(popupElem) {
+  validatePopupFormBeforeOpen(popupElem);
+  addPopupEventsListeners(popupElem);
   popupElem.classList.add('popup_opened');
-
-  const closeButton = popupElem.querySelector('.popup__close');
-  closeButton.addEventListener('click', closePopup);
 }
 
 const handleLikeButton = evt => evt.target.classList.toggle('element__button_active');
@@ -43,7 +97,7 @@ function handleEditProfileFormSubmit(evt) {
   evt.preventDefault();
   title.textContent = nameInput.value;
   subtitle.textContent = aboutInput.value;
-  closePopup(evt);
+  closePopupByButton(evt);
 }
 
 const openImage = evt => {
@@ -86,8 +140,7 @@ const handleAddFormSubmit = evt => {
   evt.preventDefault();
   const newCard = createCard(placeInput.value, imageInput.value);
   cardsList.prepend(newCard);
-  closePopup(evt);
-  addPopupForm.reset();
+  closePopupByButton(evt);
 };
 
 const switchNoCards = () => {
