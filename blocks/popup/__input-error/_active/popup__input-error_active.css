@@ -1,3 +1,5 @@
 .popup__input-error_active {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  min-height: 30px;
 }

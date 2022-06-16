@@ -61,7 +61,7 @@ const closePopupByEscKey = (evt) => {
   }
 };
 
-const closePopupByOverleyClick = (evt) => {
+const closePopupByOverlayClick = (evt) => {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
   }
@@ -71,7 +71,7 @@ const addPopupEventsListeners = (popupElem) => {
   const closeButton = popupElem.querySelector('.popup__close');
 
   closeButton.addEventListener('click', closePopupByButton);
-  popupElem.addEventListener('click', closePopupByOverleyClick);
+  popupElem.addEventListener('click', closePopupByOverlayClick);
   document.addEventListener('keydown', closePopupByEscKey);
 };
 
@@ -79,7 +79,7 @@ const removePopupEventsListeners = (popupElem) => {
   const closeButton = popupElem.querySelector('.popup__close');
 
   closeButton.removeEventListener('click', closePopupByButton);
-  popupElem.removeEventListener('click', closePopupByOverleyClick);
+  popupElem.removeEventListener('click', closePopupByOverlayClick);
   document.removeEventListener('keydown', closePopupByEscKey);
 };
 
