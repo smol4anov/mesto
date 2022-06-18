@@ -1,8 +1,8 @@
 // переменные
-const popup = document.querySelector('.popup_type_profile');
-const popupForm = popup.querySelector('.popup__container');
-const nameInput = popup.querySelector('#name');
-const aboutInput = popup.querySelector('#about-self');
+const profilePopup = document.querySelector('.popup_type_profile');
+const popupForm = profilePopup.querySelector('.popup__container');
+const nameInput = profilePopup.querySelector('#name');
+const aboutInput = profilePopup.querySelector('#about-self');
 
 const profileElement = document.querySelector('.profile');
 const title = profileElement.querySelector('.profile__title');
@@ -28,27 +28,27 @@ const noPlaces = document.querySelector('.elements__no-places');
 
 const validatePopupFormBeforeOpen = (popupElem) => {
   const formElem = popupElem.querySelector(validationSettings.formSelector);
-  if (formElem) {
-    resetInputError(formElem, validationSettings);
-  }
+  resetInputError(formElem, validationSettings);
 };
 
 const resetPopupFormAfterClose = (popupElem) => {
   const formElem = popupElem.querySelector(validationSettings.formSelector);
-  if (formElem) {
-    formElem.reset();
-  }
+  formElem.reset();
 };
 
 const closePopup = popupElem => {
-  popupElem.classList.remove('popup_opened');
-  resetPopupFormAfterClose(popupElem);
+  popupElem.classList.remove('popup_opened');  
   removePopupEventsListeners(popupElem);
+  if (popupElem.classList.contains('popup-have-form')) {
+    resetPopupFormAfterClose(popupElem);
+  }
 };
 
 const closePopupByButton = evt => {
-  const currentPopup = evt.currentTarget.closest('.popup');
-  closePopup(currentPopup);
+  if (evt.target.classList.contains('popup__close')) {
+    const currentPopup = evt.currentTarget.closest('.popup');
+    closePopup(currentPopup);
+  }
 };
 
 const closePopupByEscKey = (evt) => {
@@ -68,23 +68,21 @@ const closePopupByOverlayClick = (evt) => {
 };
 
 const addPopupEventsListeners = (popupElem) => {
-  const closeButton = popupElem.querySelector('.popup__close');
-
-  closeButton.addEventListener('click', closePopupByButton);
-  popupElem.addEventListener('click', closePopupByOverlayClick);
+  popupElem.addEventListener('click', closePopupByButton);
+  popupElem.addEventListener('mousedown', closePopupByOverlayClick);
   document.addEventListener('keydown', closePopupByEscKey);
 };
 
 const removePopupEventsListeners = (popupElem) => {
-  const closeButton = popupElem.querySelector('.popup__close');
-
-  closeButton.removeEventListener('click', closePopupByButton);
-  popupElem.removeEventListener('click', closePopupByOverlayClick);
+  popupElem.removeEventListener('click', closePopupByButton);
+  popupElem.removeEventListener('mousedown', closePopupByOverlayClick);
   document.removeEventListener('keydown', closePopupByEscKey);
 };
 
 function showPopup(popupElem) {
-  validatePopupFormBeforeOpen(popupElem);
+  if (popupElem.classList.contains('popup-have-form')) {
+    validatePopupFormBeforeOpen(popupElem);
+  }
   addPopupEventsListeners(popupElem);
   popupElem.classList.add('popup_opened');
 }
@@ -161,7 +159,7 @@ function renderCards(cardsArray) {
 editButton.addEventListener('click', () => {
   nameInput.value = title.textContent;
   aboutInput.value = subtitle.textContent;
-  showPopup(popup);
+  showPopup(profilePopup);
 });
 
 const observer = new MutationObserver(switchNoCards);
