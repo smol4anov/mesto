@@ -26,22 +26,9 @@ const imagePopupLink = imagePopup.querySelector('.popup__image');
 const noPlaces = document.querySelector('.elements__no-places');
 
 
-const validatePopupFormBeforeOpen = (popupElem) => {
-  const formElem = popupElem.querySelector(validationSettings.formSelector);
-  resetInputError(formElem, validationSettings);
-};
-
-const resetPopupFormAfterClose = (popupElem) => {
-  const formElem = popupElem.querySelector(validationSettings.formSelector);
-  formElem.reset();
-};
-
 const closePopup = popupElem => {
   popupElem.classList.remove('popup_opened');  
   removePopupEventsListeners(popupElem);
-  if (popupElem.classList.contains('popup-have-form')) {
-    resetPopupFormAfterClose(popupElem);
-  }
 };
 
 const closePopupByButton = evt => {
@@ -80,9 +67,6 @@ const removePopupEventsListeners = (popupElem) => {
 };
 
 function showPopup(popupElem) {
-  if (popupElem.classList.contains('popup-have-form')) {
-    validatePopupFormBeforeOpen(popupElem);
-  }
   addPopupEventsListeners(popupElem);
   popupElem.classList.add('popup_opened');
 }
@@ -156,17 +140,22 @@ function renderCards(cardsArray) {
   });
 }
 
-editButton.addEventListener('click', () => {
-  nameInput.value = title.textContent;
-  aboutInput.value = subtitle.textContent;
-  showPopup(profilePopup);
-});
-
 const observer = new MutationObserver(switchNoCards);
 
 observer.observe(cardsList, { childList: true });
 
-addButton.addEventListener('click', () => showPopup(addPopup));
+editButton.addEventListener('click', () => {
+  nameInput.value = title.textContent;
+  aboutInput.value = subtitle.textContent;
+  resetInputError(popupForm, validationSettings);
+  showPopup(profilePopup);
+});
+
+addButton.addEventListener('click', () => {
+  addPopupForm.reset();
+  resetInputError(addPopupForm, validationSettings);
+  showPopup(addPopup);
+});
 
 popupForm.addEventListener('submit', handleEditProfileFormSubmit);
 
