@@ -27,14 +27,18 @@ const noPlaces = document.querySelector('.elements__no-places');
 
 
 const closePopup = popupElem => {
-  popupElem.classList.remove('popup_opened');  
+  popupElem.classList.remove('popup_opened');
   removePopupEventsListeners(popupElem);
 };
 
 const closePopupByButton = evt => {
+  const currentPopup = evt.currentTarget.closest('.popup');
+  closePopup(currentPopup);
+};
+
+const closePopupByCloseButton = evt => {
   if (evt.target.classList.contains('popup__close')) {
-    const currentPopup = evt.currentTarget.closest('.popup');
-    closePopup(currentPopup);
+    closePopupByButton(evt);
   }
 };
 
@@ -55,13 +59,13 @@ const closePopupByOverlayClick = (evt) => {
 };
 
 const addPopupEventsListeners = (popupElem) => {
-  popupElem.addEventListener('click', closePopupByButton);
+  popupElem.addEventListener('click', closePopupByCloseButton);
   popupElem.addEventListener('mousedown', closePopupByOverlayClick);
   document.addEventListener('keydown', closePopupByEscKey);
 };
 
 const removePopupEventsListeners = (popupElem) => {
-  popupElem.removeEventListener('click', closePopupByButton);
+  popupElem.removeEventListener('click', closePopupByCloseButton);
   popupElem.removeEventListener('mousedown', closePopupByOverlayClick);
   document.removeEventListener('keydown', closePopupByEscKey);
 };
