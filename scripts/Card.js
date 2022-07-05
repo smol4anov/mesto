@@ -1,11 +1,9 @@
-import { imagePopupTitle, imagePopupLink, imagePopup } from './variables.js';
-import { showPopup } from './commonFunction.js';
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector;
     this._title = data.name;
     this._image = data.link;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -19,45 +17,42 @@ export class Card {
   }
 
   _handleLikeButton() {
-    this._element.querySelector('.element__button')
-      .classList.toggle('element__button_active');
+    this._likeButton.classList.toggle('element__button_active');
   }
 
   _handleDeleteButton() {
     this._element.remove();
   }
 
-  _openImage() {
-    imagePopupTitle.textContent = this._title;
-    imagePopupLink.src = this._image;
-    imagePopupLink.alt = this._title;
+  _setEventListeners() {
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeButton();
+    });
 
-    showPopup(imagePopup);
+    this._deleteButton.addEventListener('click', () => {
+      this._handleDeleteButton();
+    });
+
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._title, this._image);
+    });
   }
 
-  _setEventListeners() {
-    this._element.querySelector('.element__button')
-      .addEventListener('click', () => {
-        this._handleLikeButton();
-      });
-
-    this._element.querySelector('.element__delete')
-      .addEventListener('click', () => {
-        this._handleDeleteButton();
-      });
-
-    this._element.querySelector('.element__image')
-      .addEventListener('click', () => {
-        this._openImage();
-      });
+  _findСomponents() {
+    this._cardImage = this._element.querySelector('.element__image');
+    this._cardTitle = this._element.querySelector('.element__title');
+    this._likeButton = this._element.querySelector('.element__button');
+    this._deleteButton = this._element.querySelector('.element__delete');
   }
 
   generateCard() {
     this._element = this._getTemplate();
+    this._findСomponents();
     this._setEventListeners();
 
-    this._element.querySelector('.element__image').src = this._image;
-    this._element.querySelector('.element__title').textContent = this._title;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
+    this._cardTitle.textContent = this._title;
 
     return this._element;
   }
