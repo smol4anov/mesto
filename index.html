@@ -28,7 +28,6 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="elements">
-        <h2 class="elements__no-places">Добавьте новое воспоминание прямо&nbsp;сейчас</h2>
         <ul class="elements__list">
         </ul>
       </section>
@@ -42,9 +41,9 @@
         <input class="popup__input" type="text" id="name" name="name" required minlength="2" maxlength="40"
           placeholder="Имя">
         <span class="popup__input-error name-input-error"></span>
-        <input class="popup__input" type="text" id="about-self" name="about-self" required minlength="2" maxlength="200"
+        <input class="popup__input" type="text" id="about" name="about" required minlength="2" maxlength="200"
           placeholder="О себе">
-        <span class="popup__input-error about-self-input-error"></span>
+        <span class="popup__input-error about-input-error"></span>
         <button class="popup__submit" type="submit">Сохранить</button>
         <button type="button" class="popup__close"></button>
       </form>
@@ -81,8 +80,6 @@
     </template>
 
   </div>
-  <script type="module" src="./scripts/FormValidator.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
   <script type="module" src="./scripts/index.js"></script>
 </body>
 
