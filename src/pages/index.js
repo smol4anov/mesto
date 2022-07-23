@@ -20,11 +20,11 @@ function createCard(item) {
   return card.generateCard();
 }
 
-const CardList = new Section({
+const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
     const cardElement = createCard(item);
-    CardList.addItem(cardElement);
+    cardList.addItem(cardElement);
   }
 }, pageSelectors.cardListSelector);
 
@@ -38,12 +38,14 @@ imagePopup.setEventListeners();
 
 const addPopup = new PopupWithForm(pageSelectors.addPopupSelector, (data) => {
   const cardElement = createCard({ name: data.place, link: data.image });
-  CardList.insertItem(cardElement);
+  cardList.insertItem(cardElement);
+  addPopup.close();
 });
 addPopup.setEventListeners();
 
 const editPopup = new PopupWithForm(pageSelectors.editPopupSelector, (data) => {
   userInfo.setUserInfo(data);
+  editPopup.close();
 });
 editPopup.setEventListeners();
 
@@ -68,6 +70,6 @@ addButton.addEventListener('click', () => {
   addPopup.open();
 });
 
-CardList.renderItems();
+cardList.renderItems();
 
 enableValidation(validationSettings);
