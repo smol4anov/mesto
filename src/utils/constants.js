@@ -1,30 +1,3 @@
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 export const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -40,10 +13,20 @@ export const pageSelectors = {
   cardListSelector: '.elements__list',
   profileTitleSelector: '.profile__title',
   profileAboutSelector: '.profile__subtitle',
+  profileAvatarSelector: '.profile__avatar',
   imagePopupSelector: '.popup_type_open-image',
   addPopupSelector: '.popup_type_new-place',
   editPopupSelector: '.popup_type_profile',
   editButtonSelector:'.profile__edit-button',
   addButtonSelector: '.profile__add-button',
-  elementTemplateSelector: '#element-template'
+  elementTemplateSelector: '#element-template',
+  deletePopupSelector: '.popup_type_delete-card',
+  editAvatarPopupSelector: '.popup_type_avatar-edit',
+  errorPopupSelector: '.popup_type_error'
+};
+
+export const apiConstants = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/',
+  cohortId: 'cohort-47',
+  token: '2746e8e2-7af3-4dd8-911a-e5e0181278d6'
 };

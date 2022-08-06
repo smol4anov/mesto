@@ -74,7 +74,7 @@
     <section class="popup popup_type_delete-card">
       <div class="popup__container">
         <h2 class="popup__title">Вы уверены?</h2>
-        <form class="popup__form" action="#">
+        <form name="delete-card-form" class="popup__delete-card-form" action="#">
           <button class="popup__submit" type="submit">Да</button>
         </form>
         <button type="button" class="popup__close"></button>
@@ -85,9 +85,19 @@
       <div class="popup__container">
         <h2 class="popup__title">Обновить аватар</h2>
         <form name="avatar-edit-form" action="#" class="popup__form" novalidate>
-          <input class="popup__input" type="url" id="image" name="image" required placeholder="Ссылка на картинку">
-          <span class="popup__input-error image-input-error"></span>
+          <input class="popup__input" type="url" id="avatar" name="avatar" required placeholder="Ссылка на картинку">
+          <span class="popup__input-error avatar-input-error"></span>
           <button class="popup__submit" type="submit">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </div>
+    </section>
+
+    <section class="popup popup_type_error">
+      <div class="popup__container">
+        <h2 class="popup__title">Ошибка</h2>
+        <form name="error-form" class="popup__error-form" action="#">
+          <button class="popup__submit" type="submit">Попробую еще раз</button>
         </form>
         <button type="button" class="popup__close"></button>
       </div>

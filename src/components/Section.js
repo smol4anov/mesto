@@ -17,6 +17,10 @@ export default class Section {
     this._container.innerHTML = '';
   }
 
+  setCardsInfo(items) {
+    this._renderedItems = items;
+  }
+
   renderItems() {
     this.clear();
 
