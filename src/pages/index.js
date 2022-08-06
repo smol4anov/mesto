@@ -18,7 +18,10 @@ const editButton = document.querySelector(pageSelectors.editButtonSelector);
 const addButton = document.querySelector(pageSelectors.addButtonSelector);
 
 const api = new Api(apiConstants);
-const userInfo = new UserInfo(pageSelectors, () => editAvatarPopup.open());
+const userInfo = new UserInfo(pageSelectors, () => {
+  formValidators[pageSelectors.editAvatarFormName].resetValidation();
+  editAvatarPopup.open();
+});
 
 const cardList = new Section({
   items: [],
@@ -48,36 +51,42 @@ const addPopup = new PopupWithForm(pageSelectors.addPopupSelector, (data) => {
     .then(res => {
       const cardElement = createCard(res);
       cardList.insertItem(cardElement);
+      addPopup.close();
     })
     .catch(res => errorPopup.open(`${res} при добавлении новой карточки. Скоро исправим!`))
-    .finally(() => editPopup.savingInform(false));
-  addPopup.close();
+    .finally(() => addPopup.savingInform(false));
 });
 
 const editPopup = new PopupWithForm(pageSelectors.editPopupSelector, (data) => {
   api.sendUserInfo(data)
-    .then(res => userInfo.setUserInfo(res))
+    .then(res => {
+      userInfo.setUserInfo(res);
+      editPopup.close();
+    })
     .catch(res => errorPopup.open(`${res} при редактировании профиля. Уже чиним!`))
     .finally(() => editPopup.savingInform(false));
-  editPopup.close();
 });
 
 const deletePopup = new PopupConfirmation(pageSelectors.deletePopupSelector, (cardId) => {
   api.deleteCard(cardId)
-    .then(() => deletePopup.deleteCard())
+    .then(() => {
+      deletePopup.deleteCard();
+      deletePopup.close();
+    })
     .catch(res => errorPopup.open(`${res} при удалении карточки. Попробуйте позже`));
-  deletePopup.close();
 });
 
-const errorPopup = new PopupErrorInform(pageSelectors.errorPopupSelector, 
+const errorPopup = new PopupErrorInform(pageSelectors.errorPopupSelector,
   () => errorPopup.close());
 
 const editAvatarPopup = new PopupWithForm(pageSelectors.editAvatarPopupSelector, (data) => {
   api.updateAvatar(data)
-    .then(res => userInfo.setUserInfo(res))
+    .then(res => {
+      userInfo.setUserInfo(res);
+      editAvatarPopup.close();
+    })
     .catch(res => errorPopup.open(`${res} при загрузке аватарки. Уже чиним!`))
-    .finally(() => editPopup.savingInform(false));
-  editAvatarPopup.close();
+    .finally(() => editAvatarPopup.savingInform(false));
 });
 
 const enableValidation = (config) => {
@@ -90,6 +99,17 @@ const enableValidation = (config) => {
     });
 };
 
+const handleEditButtonClick = () => {
+  formValidators[pageSelectors.profileFormName].resetValidation();
+  const userData = userInfo.getUserInfo();
+  editPopup.open(userData);
+}; 
+
+const handleAddButtonClick = () => {
+  formValidators[pageSelectors.newCardFormName].resetValidation();
+  addPopup.open();
+};
+
 userInfo.setEventListeners();
 imagePopup.setEventListeners();
 addPopup.setEventListeners();
@@ -98,16 +118,8 @@ deletePopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 errorPopup.setEventListeners();
 
-editButton.addEventListener('click', () => {
-  formValidators[pageSelectors.profileFormName].resetValidation();
-  const userData = userInfo.getUserInfo();
-  editPopup.open(userData);
-});
-
-addButton.addEventListener('click', () => {
-  formValidators[pageSelectors.newCardFormName].resetValidation();
-  addPopup.open();
-});
+editButton.addEventListener('click', handleEditButtonClick);
+addButton.addEventListener('click', handleAddButtonClick);
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([resUserInfo, resCards]) => {

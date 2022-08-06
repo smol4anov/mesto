@@ -10,6 +10,7 @@ export const validationSettings = {
 export const pageSelectors = {
   profileFormName: 'profile-form',
   newCardFormName: 'new-card-form',
+  editAvatarFormName: 'avatar-edit-form',
   cardListSelector: '.elements__list',
   profileTitleSelector: '.profile__title',
   profileAboutSelector: '.profile__subtitle',
